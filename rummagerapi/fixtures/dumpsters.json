@@ -1,0 +1,23 @@
+[
+    {
+        "model": "rummagerapi.dumpster",
+        "pk": 1,
+        "fields": {
+            "location": "Nashville, TN"
+        }
+    },
+    {
+        "model": "rummagerapi.dumpster",
+        "pk": 2,
+        "fields": {
+            "location": "New York, NY"
+        }
+    },
+    {
+        "model": "rummagerapi.dumpster",
+        "pk": 3,
+        "fields": {
+            "location": "Tokyo, Japan"
+        }
+    }
+]

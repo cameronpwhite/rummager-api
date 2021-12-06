@@ -1,0 +1,9 @@
+[
+    {
+        "model": "rummagerapi.diver",
+        "pk": 1,
+        "fields": {
+            "user": 1
+        }
+    }
+]

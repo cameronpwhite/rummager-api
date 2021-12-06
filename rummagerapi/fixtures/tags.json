@@ -1,0 +1,37 @@
+[
+    {
+        "model": "rummagerapi.tag",
+        "pk": 1,
+        "fields": {
+            "label": "Food"
+        }
+    },
+    {
+        "model": "rummagerapi.tag",
+        "pk": 2,
+        "fields": {
+            "label": "Electronics"
+        }
+    },
+    {
+        "model": "rummagerapi.tag",
+        "pk": 3,
+        "fields": {
+            "label": "Clothes"
+        }
+    },
+    {
+        "model": "rummagerapi.tag",
+        "pk": 4,
+        "fields": {
+            "label": "Beauty"
+        }
+    },
+    {
+        "model": "rummagerapi.tag",
+        "pk": 5,
+        "fields": {
+            "label": "Video Games"
+        }
+    }
+]

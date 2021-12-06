@@ -1,0 +1,10 @@
+[
+    {
+        "model": "rummagerapi.item",
+        "pk": 1,
+        "fields": {
+            "name": "Half-eaten burger",
+            "haul": 1
+        }
+    }
+]

@@ -1,0 +1,13 @@
+[
+    {
+        "model": "rummagerapi.haul",
+        "pk": 1,
+        "fields": {
+            "description": "My first haul",
+            "image_path": "Image file",
+            "diver": 1,
+            "dumpster": 1,
+            "tags": [1]
+        }
+    }
+]
