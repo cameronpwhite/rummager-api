@@ -1,0 +1,8 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.pythonPath": "/Users/cameron/.local/share/virtualenvs/rummager-server-1CDLOv9w/bin/python",
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django",
+        "--django-settings-module=rummager.settings",
+    ],    
+}
