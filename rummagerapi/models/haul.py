@@ -9,6 +9,6 @@ class Haul(models.Model):
 
     description = CharField(max_length=50)
     image_path = models.ImageField(upload_to='images/')
-    diver_id = models.ForeignKey(Diver, on_delete=models.CASCADE)
-    dumpster_id = models.ForeignKey(Dumpster, on_delete=models.CASCADE)
+    diver = models.ForeignKey(Diver, on_delete=models.CASCADE)
+    dumpster = models.ForeignKey(Dumpster, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)

@@ -4,5 +4,14 @@
     "python.linting.pylintArgs": [
         "--load-plugins=pylint_django",
         "--django-settings-module=rummager.settings",
-    ],    
+    ],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Rummager",
+            "database": "db.sqlite3"
+        }
+    ],
+    
 }

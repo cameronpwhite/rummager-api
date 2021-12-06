@@ -6,4 +6,4 @@ from django.db.models.fields.related import ForeignKey
 class Item(models.Model):
 
     name = CharField(max_length=50)
-    haul_id = models.ForeignKey(Haul, on_delete=models.CASCADE)
+    haul = models.ForeignKey(Haul, on_delete=models.CASCADE)
