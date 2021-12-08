@@ -40,15 +40,17 @@ class HaulView(ViewSet):
             location = request.data['dumpster']
         )
         haul.dumpster = dumpster
-        haul.tags = request.data['tags']
 
         try:
             haul.save()
+            #Filter tags by the tags in the request data
+            #Assigns tags to haul with set method
+            haul.tags.set(request.data['tags'])
             #Gets items from the request.
             items = request.data['items']
             #Loops through the items from request and assigns them to the Haul that was just created.
             for item in items:
-                Item.objects.create(haul=Haul.objects.last(), name=item['name'])
+                Item.objects.create(haul=Haul.objects.last(), name=item)
             serializer = HaulSerializer(haul, context={'request':request})
             return Response(serializer.data)
         
@@ -132,7 +134,7 @@ class HaulDumpsterSerializer(serializers.ModelSerializer):
 class HaulUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name']
+        fields = ['id','username', 'first_name', 'last_name']
 
 class HaulDiverSerializer(serializers.ModelSerializer):
     
@@ -150,7 +152,7 @@ class HaulSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Haul
-        fields = ('description', 'image_path', 'diver', 'dumpster', 'tags', 'items')
+        fields = ('id','description', 'image_path', 'diver', 'dumpster', 'tags', 'items')
         depth = 1
 
 
