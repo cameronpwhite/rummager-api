@@ -1,4 +1,5 @@
 '''View module for handling requests about hauls'''
+from rummagerapi.models import item
 from rummagerapi.views.dumpster import DumpsterSerializer
 from rummagerapi.views.tag import TagSerializer
 from rummagerapi.views.item import ItemSerializer
@@ -79,8 +80,13 @@ class HaulView(ViewSet):
             location = request.data['dumpster']
         )
         haul.dumpster = dumpster
-        haul.tags = request.data['tags']
         haul.save()
+        haul.tags.set(request.data['tags'])
+        items = request.data['items']
+        for item in items:
+            updated_item, created = Item.objects.update_or_create(
+                name = item, haul = haul.id
+            )
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 

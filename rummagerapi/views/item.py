@@ -34,6 +34,31 @@ class ItemView(ViewSet):
         )
         return Response(serializer.data)
 
+    def update(self, request, pk=None):
+        '''Handle PUT requests for a single Item'''
+
+        item = Item.objects.get(pk=pk)
+        item.name = request.data['name']
+        item.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+        
+
+    def destroy(self, request, pk=None):
+        '''Handle DELETE requests for a single Item'''
+
+        try:
+            item = Item.objects.get(pk=pk)
+            item.delete()
+            
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        
+        except Haul.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -42,4 +67,3 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ('id', 'name', 'haul')
-        depth = 1
