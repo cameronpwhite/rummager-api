@@ -1,8 +1,4 @@
 '''View module for handling requests about hauls'''
-from rummagerapi.models import item
-from rummagerapi.views.dumpster import DumpsterSerializer
-from rummagerapi.views.tag import TagSerializer
-from rummagerapi.views.item import ItemSerializer
 from rummagerapi.models.haul import Haul
 from rummagerapi.models.diver import Diver
 from rummagerapi.models.item import Item
@@ -12,6 +8,7 @@ from rest_framework import status
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework import serializers
 from rest_framework import status
 from rummagerapi.models import Dumpster, Item, Tag, dumpster
@@ -82,13 +79,9 @@ class HaulView(ViewSet):
         haul.dumpster = dumpster
         haul.save()
         haul.tags.set(request.data['tags'])
-        items = request.data['items']
-        for item in items:
-            updated_item, created = Item.objects.update_or_create(
-                name = item, haul = haul.id
-            )
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
+
 
     def destroy(self, request, pk=None):
         '''Handle DELETE requests for a single Haul'''
@@ -117,11 +110,16 @@ class HaulView(ViewSet):
         return Response(serializer.data)
 
 
-    #Use @api_view for making custom actions
+    @action(detail=False)
+    def user_hauls(self, request):
+        '''Handles GET request for Hauls by current user'''
+
+        haul = Haul.objects.filter(diver = request.auth.user.id)
+        serializer = HaulSerializer(haul, context={'request': request}, many=True)
+        return Response(serializer.data)
 
 
 
-#Q: Do I have to create HaulTags and HaulItem Serializers in order to display them properly?
 class HaulTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
