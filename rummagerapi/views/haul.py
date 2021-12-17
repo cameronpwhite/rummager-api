@@ -80,10 +80,7 @@ class HaulView(ViewSet):
         haul.save()
         haul.tags.set(request.data['tags'])
         items = request.data['items']
-        for item in items:
-            Item.objects.get_or_create(
-                name=item, haul=haul
-            )
+        haul.items.set(items)
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
